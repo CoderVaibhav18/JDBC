@@ -1,5 +1,6 @@
 import java.sql.*;
-public class jdbc {
+
+public class insertIntoDb {
     private static final String url = "jdbc:mysql://localhost:3306/mydb";
     private static final String username = "root";
     private static final String password = "vaibhavsathe18";
@@ -13,21 +14,18 @@ public class jdbc {
         try{
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM students";
-            ResultSet resultSet = statement.executeQuery(query);
-            while(resultSet.next()){
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                int age = resultSet.getInt("age");
-                double marks = resultSet.getDouble("marks");
+            String query = String.format("INSERT INTO students(name, age, marks) VALUES('%s', %o, %f)", "Pratisha", 20, 76.9);
+            System.out.println(query);
+            int rows = statement.executeUpdate(query);
 
-                System.out.println("id: " + id);
-                System.out.println("name: " + name);
-                System.out.println("age: " + age);
-                System.out.println("marks: " + marks);
+            if(rows > 0){
+                System.out.println("Data inserted successfully: "+ rows);
+            }else{
+                System.out.println("Data not inserted");
             }
-        } catch (SQLException e) {
+        }catch (SQLException e){
             System.out.println(e.getMessage());
         }
     }
 }
+
