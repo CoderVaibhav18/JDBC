@@ -1,5 +1,5 @@
 import java.sql.*;
-public class update {
+public class delete {
     private static final String url = "jdbc:mysql://localhost:3306/mydb";
     private static final String username = "root";
     private static final String password = "vaibhavsathe18";
@@ -13,14 +13,14 @@ public class update {
         try{
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
-            String query = String.format("UPDATE students SET marks = (%f) WHERE id = (%d)", 94.9, 3);
+            String query = String.format("DELETE FROM students WHERE id = %d", 2);
             int rows = statement.executeUpdate(query);
             if(rows>0){
-                System.out.println("Rows affected");
+                System.out.println("deleted successfully");
             }else{
-                System.out.println("Rows not affected");
+                System.out.println("deleted not affected");
             }
-        } catch (SQLException e) {
+        }catch (SQLException e){
             System.out.println(e.getMessage());
         }
     }
